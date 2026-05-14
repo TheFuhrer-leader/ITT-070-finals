@@ -1,0 +1,24 @@
+Code Explanation
+
+1. How are products stored in your program?
+Products are stored as a list of Product objects in main.py. 
+  Each Product is a custom class defined in models.py containing pid, name, quantity, price, etc. 
+The list is loaded from data.json when the program starts and saved back when the user exits.
+
+2. How are purchase orders connected to vendors and products?
+Each PurchaseOrder stores a vendor_id and a list of items. 
+  Each item is a dictionary containing product id, quantity, and price. 
+  This connects the order to both the vendor and the specific products.
+
+3. How does receiving a shipment change inventory?
+When receive_order() is called, the program finds the purchase order, 
+  checks its status, then loops through each item and adds the ordered quantity to the matching product's stock in the products list. 
+  Finally, it changes the order status to "received".
+
+4. How does your JSON save/load process work?
+In file_manager.py, save_data() converts all objects to dictionaries using to_dict() and writes them to data.json. load_data() reads the file and recreates the objects using the class constructors. 
+This allows data to be saved permanently.
+
+5. What is one bug you fixed and how did you fix it?
+I had a ModuleNotFoundError when importing inventory_manager. 
+I fixed it by ensuring all .py files were in the same folder and correcting the import statements in main.py. I also added sys.path.append as backup.
